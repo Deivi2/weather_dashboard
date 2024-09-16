@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { ForecastProps } from "./Forecast.types";
 import { TWeatherData } from "@/types";
 import { Routes } from "@/utils/routes";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 
 const Forecast: React.FC<ForecastProps> = ({ slug }) => {
   const [weatherResponse, setWeatherResponse] = useState<TWeatherData>(

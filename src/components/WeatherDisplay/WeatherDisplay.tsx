@@ -5,7 +5,7 @@ import { DEFAULT_CITY } from "./WeatherDisplay.constants";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import Favorites from "../Favorites/Favorites";
 import { TWeatherData } from "@/types";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 
 const WeatherDisplay = () => {
   const [weatherResponse, setWeatherResponse] = useState({} as TWeatherData);

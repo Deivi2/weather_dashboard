@@ -2,13 +2,11 @@ import { Info } from "lucide-react";
 
 const ErrorMessage = () => {
   return (
-    <section
-      className="flex justify-center items-center flex-col mt-6 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-      role="alert"
-    >
+    <section className="flex justify-center items-center flex-col mt-6 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
       <span className="flex gap-2 font-medium">
         <Info /> Something went wrong
       </span>
+
       <p className="my-3">Please refresh the page</p>
 
       <button
