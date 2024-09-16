@@ -8,7 +8,7 @@ Installation:
 npm install
 ```
 
-- To start up a a dev server run:
+- To start up a dev server run:
 
 ```sh
 npm run dev
