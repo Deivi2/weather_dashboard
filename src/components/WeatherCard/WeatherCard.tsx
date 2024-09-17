@@ -12,18 +12,21 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   description,
   humidity,
   wind,
+  country,
 }) => {
   const { setFavoriteCity, deleteFavoriteCity, favoriteCities } =
     useCitiesWeatherState();
 
-  const isInFavorites = favoriteCities.includes(city);
+  const cityName = `${city} - ${country}`;
+
+  const isInFavorites = favoriteCities.includes(cityName);
 
   return (
     <div className="flex rounded-xl bg-white/20 shadow-lg ring-1 ring-black/5 m-5 p-5 text-white relative">
       {!isInFavorites && (
         <div
           className="flex gap-1 cursor-pointer absolute"
-          onClick={() => setFavoriteCity(city)}
+          onClick={() => setFavoriteCity(cityName)}
         >
           <SquarePlus /> <p>add</p>
         </div>
@@ -32,7 +35,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       {isInFavorites && (
         <div
           className="flex gap-1 cursor-pointer absolute"
-          onClick={() => deleteFavoriteCity(city)}
+          onClick={() => deleteFavoriteCity(cityName)}
         >
           <SquareMinus /> <p>remove</p>
         </div>
@@ -43,7 +46,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       </div>
 
       <div className="text-center ">
-        <p className="text-3xl">{city}</p>
+        <p className="text-3xl">{cityName}</p>
         <p className="text-5xl pt-1">{temperature}</p>
         <p className="text-l pt-1">{description}</p>
         <p className="text-l pt-1">
@@ -52,7 +55,10 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
         <Link
           className="text-xs text-blue-900"
-          to={Routes.fiveDaysForecast.replace(":slug", city)}
+          to={Routes.fiveDaysForecast.replace(
+            ":slug",
+            cityName.split("-").join(",").replace(/ /g, "")
+          )}
         >
           Show 5-day forecast
         </Link>

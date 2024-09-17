@@ -5,4 +5,5 @@ export type WeatherCardProps = {
   description: string;
   weatherCondition: string;
   wind: string;
+  country: string;
 };

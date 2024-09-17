@@ -10,6 +10,7 @@ import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 const WeatherDisplay = () => {
   const [weatherResponse, setWeatherResponse] = useState({} as TWeatherData);
   const [city, setCity] = useState(DEFAULT_CITY);
+  const [country, setCountry] = useState("");
   const [error, setError] = useState("");
 
   const temperature = `${Math.round(weatherResponse?.list?.[0].main.temp)}°C`;
@@ -19,15 +20,16 @@ const WeatherDisplay = () => {
   const description = weatherResponse?.list?.[0].weather[0].description;
   const isDataLoaded = Object.keys(weatherResponse).length > 0;
 
-  const handleWeatherSearch = async (city: string) => {
+  const handleWeatherSearch = async (city: string, index: number = 0) => {
     try {
       const cityData = await getCityData(city);
       const weatherData = await getWeatherData(
-        cityData[0].lat,
-        cityData[0].lon
+        cityData[index].lat,
+        cityData[index].lon
       );
 
-      setCity(city);
+      setCity(cityData[index].name);
+      setCountry(cityData[index].country);
       setWeatherResponse(weatherData);
     } catch (error) {
       setError((error as Error).message);
@@ -45,19 +47,27 @@ const WeatherDisplay = () => {
       {isDataLoaded && (
         <>
           <Autocomplete
-            onChange={(option) => handleWeatherSearch(option.name)}
+            onChange={(option, index) =>
+              handleWeatherSearch(option.name, index)
+            }
           />
 
           <WeatherCard
             city={city}
             wind={wind}
+            country={country}
             humidity={humidity}
             temperature={temperature}
             description={description}
             weatherCondition={weatherCondition}
           />
 
-          <Favorites onClick={(city) => handleWeatherSearch(city)} />
+          <Favorites
+            onClick={(city) => {
+              const parsedCity = city.split("-").join(",").replace(/ /g, "");
+              handleWeatherSearch(parsedCity);
+            }}
+          />
         </>
       )}
     </main>

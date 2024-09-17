@@ -8,7 +8,7 @@ const useAutoComplete = ({
 }: {
   delay?: number;
   source: (search: string) => Promise<TCityData[]>;
-  onChange: (option: TCityData) => void;
+  onChange: (option: TCityData, index: number) => void;
 }) => {
   const [myTimeout, setMyTimeOut] = useState(setTimeout(() => {}, 0));
   const listRef = useRef({} as HTMLUListElement);
@@ -25,7 +25,7 @@ const useAutoComplete = ({
 
   function selectOption(index: number) {
     if (index > -1) {
-      onChange(suggestions[index]);
+      onChange(suggestions[index], index);
       setTextValue(suggestions[index].name);
     }
     clearSuggestions();
