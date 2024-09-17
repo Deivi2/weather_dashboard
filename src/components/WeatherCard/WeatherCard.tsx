@@ -57,7 +57,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
           className="text-xs text-blue-900"
           to={Routes.fiveDaysForecast.replace(
             ":slug",
-            cityName.split("-").join(",").replace(/ /g, "")
+            cityName.replace(/ - /g, ",")
           )}
         >
           Show 5-day forecast

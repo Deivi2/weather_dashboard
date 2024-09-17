@@ -64,7 +64,7 @@ const WeatherDisplay = () => {
 
           <Favorites
             onClick={(city) => {
-              const parsedCity = city.split("-").join(",").replace(/ /g, "");
+              const parsedCity = city.replace(/ - /g, ",");
               handleWeatherSearch(parsedCity);
             }}
           />
